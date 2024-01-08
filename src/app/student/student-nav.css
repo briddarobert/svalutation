@@ -1,4 +1,6 @@
 .student-nav {
+	--nav-color: #c6c6c8ff;
+
 	position: sticky;
 	left: 5%;
 	width: 90%;
@@ -46,4 +48,10 @@
 
 .student-nav li > *:not(img) {
 	text-align: center;
+}
+
+@media (prefers-color-scheme: dark) {
+	.student-nav {
+		--nav-color: #38383aff;
+	}
 }

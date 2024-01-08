@@ -1,6 +1,5 @@
 :root {
 	--border-radius: 12px;
-	--nav-color: #c6c6c8ff;
 }
 
 * {
@@ -28,7 +27,4 @@ a {
 }
 
 @media (prefers-color-scheme: dark) {
-	:root {
-		--nav-color: #38383aff;
-	}
 }
