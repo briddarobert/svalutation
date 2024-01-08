@@ -3,12 +3,6 @@
 	--nav-color: #c6c6c8ff;
 }
 
-@media (prefers-color-scheme: dark) {
-	:root {
-		--nav-color: #38383aff;
-	}
-}
-
 * {
 	box-sizing: border-box;
 	padding: 0;
@@ -31,4 +25,10 @@ body {
 a {
 	color: inherit;
 	text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--nav-color: #38383aff;
+	}
 }
