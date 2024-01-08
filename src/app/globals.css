@@ -5,7 +5,6 @@
 
 @media (prefers-color-scheme: dark) {
 	:root {
-		--border-radius: 12px;
 		--nav-color: #38383aff;
 	}
 }
@@ -33,10 +32,4 @@ body {
 a {
 	color: inherit;
 	text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-	html {
-		color-scheme: dark;
-	}
 }
