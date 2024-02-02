@@ -1,12 +1,13 @@
 "use client";
-import { getAllObservationsForStudent } from "@/app/api";
-import { useContext } from "react";
-import { StudentContext } from "../layout";
+import { getAllObservationsForStudent } from "@/app/[classId]/api";
 
-export default function StudentViewPage() {
-	const [observations] = getAllObservationsForStudent(
-		useContext(StudentContext)
-	);
+export default function StudentViewPage({
+	params,
+}: {
+	params: { classId: string; id: string };
+}) {
+	const studentId = params.id;
+	const [observations] = getAllObservationsForStudent(Number(studentId));
 
 	return (
 		<>

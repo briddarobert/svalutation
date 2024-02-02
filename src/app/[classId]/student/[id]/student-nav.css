@@ -15,10 +15,8 @@
 }
 
 .student-nav li {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
 	justify-content: center;
+	text-align: center;
 	width: 20%;
 	height: 100%;
 }
@@ -33,21 +31,22 @@
 	font-size: 1.5em;
 }
 
-.student-nav li > img {
-	cursor: pointer;
-	width: max-content;
-	height: 100%;
-}
-
 #student-nav-arrow-left {
-	align-self: flex-start;
-}
-#student-nav-arrow-right {
-	align-self: flex-end;
+	display: flex;
+	padding-left: 1%;
+	padding-bottom: 0.5%;
+	flex-direction: column;
+	align-items: flex-start;
+	font-size: 5rem;
 }
 
-.student-nav li > *:not(img) {
-	text-align: center;
+#student-nav-arrow-right {
+	display: flex;
+	padding-right: 1%;
+	padding-bottom: 0.5%;
+	flex-direction: column;
+	align-items: flex-end;
+	font-size: 5rem;
 }
 
 @media (prefers-color-scheme: dark) {

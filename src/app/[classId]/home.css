@@ -1,0 +1,21 @@
+.class-nav {
+	display: flex;
+	flex-direction: row;
+	list-style: none;
+	background: var(--nav-color);
+	border-radius: var(--border-radius);
+}
+
+.class-nav p:not(#class-nav-info) {
+	justify-content: center;
+	text-align: center;
+	width: 20%;
+	height: 100%;
+	cursor: pointer;
+}
+
+@media (prefers-color-scheme: dark) {
+	.student-nav {
+		--nav-color: #38383aff;
+	}
+}
