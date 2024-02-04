@@ -22,7 +22,7 @@ export default function Home({ params }: { params: { classId: string } }) {
 
 	return (
 		<>
-			<h1>Pagina Home</h1>
+			<h1>Studenti</h1>
 			<div className="class-nav">
 				<p
 					onClick={() => {
