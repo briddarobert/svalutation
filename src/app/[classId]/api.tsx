@@ -225,7 +225,7 @@ const getAllObservationsForStudent = (studentId: number) => {
 
 const getAllObservationsByTeacherOnStudent = (
 	teacherId: number,
-	studentId: number
+	studentId: number,
 ) => {
 	const [data, setData] = useState<Observation[]>();
 
@@ -240,7 +240,7 @@ const getAllObservationsByTeacherOnStudent = (
 				headers: {
 					Authorization: `Basic ${auth}`,
 				},
-			}
+			},
 		)
 			.then((res) => res.json())
 			.then((data) => setData(data));

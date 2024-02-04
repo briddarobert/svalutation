@@ -23,20 +23,22 @@ export default function Home({ params }: { params: { classId: string } }) {
 	return (
 		<>
 			<h1>Pagina Home</h1>
-			<div className='class-nav'>
+			<div className="class-nav">
 				<p
 					onClick={() => {
 						router.push(`/${classId - 1}`);
-					}}>
+					}}
+				>
 					🠜
 				</p>
-				<p id='class-nav-info'>
+				<p id="class-nav-info">
 					{teacher && teacher.Classes[classId - 1].Name}
 				</p>
 				<p
 					onClick={() => {
 						router.push(`/${classId + 1}`);
-					}}>
+					}}
+				>
 					🠞
 				</p>
 			</div>
@@ -48,7 +50,8 @@ export default function Home({ params }: { params: { classId: string } }) {
 								href={{
 									pathname: `/${classId}/student/${student.Id}`,
 								}}
-								shallow={true}>
+								shallow={true}
+							>
 								{student.Name} {student.Surname}
 							</Link>
 						</li>

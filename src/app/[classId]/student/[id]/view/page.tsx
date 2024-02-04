@@ -16,7 +16,8 @@ export default function StudentViewPage({
 				observations.map((observation) => {
 					return (
 						<p key={observation.Id}>
-							ID:{observation.Id} Level:{observation.Remark.Level} Description:
+							ID:{observation.Id} Level:{observation.Remark.Level}{" "}
+							Description:
 							{observation.Remark.Description} Achieved:
 							{observation.Achieved ? "Sì" : "No"}
 						</p>

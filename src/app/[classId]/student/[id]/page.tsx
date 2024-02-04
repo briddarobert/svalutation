@@ -21,7 +21,8 @@ export default function StudentActionSelectPage({
 							return splitPaths.join("/");
 						})()}`,
 					}}
-					shallow={true}>
+					shallow={true}
+				>
 					Guarda Osservazioni
 				</Link>
 			</p>
@@ -35,7 +36,8 @@ export default function StudentActionSelectPage({
 							return splitPaths.join("/");
 						})()}`,
 					}}
-					shallow={true}>
+					shallow={true}
+				>
 					Fai Osservazione
 				</Link>
 			</p>
