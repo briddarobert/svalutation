@@ -29,7 +29,7 @@ export default function Home({ params }: { params: { classId: string } }) {
 						router.push(`/${classId - 1}`);
 					}}
 				>
-					🠜
+					←
 				</p>
 				<p id="class-nav-info">
 					{teacher && teacher.Classes[classId - 1].Name}
@@ -39,7 +39,7 @@ export default function Home({ params }: { params: { classId: string } }) {
 						router.push(`/${classId + 1}`);
 					}}
 				>
-					🠞
+					→
 				</p>
 			</div>
 			<ol>
