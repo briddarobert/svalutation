@@ -32,7 +32,7 @@ export default function StudentSelector({
 									})()}`,
 								}}
 							>
-								🠜
+								←
 							</Link>
 						</li>
 						<li id="student-nav-info">
@@ -56,7 +56,7 @@ export default function StudentSelector({
 									})()}`,
 								}}
 							>
-								🠞
+								→
 							</Link>
 						</li>
 					</ol>
