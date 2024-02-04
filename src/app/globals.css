@@ -21,6 +21,8 @@ body {
 	margin: 10px;
 	flex-direction: column;
 	justify-content: center;
+	max-width: 1200px;
+	margin: 0px auto;
 }
 
 a {
