@@ -42,7 +42,7 @@ export default function Home({ params }: { params: { classId: string } }) {
 					→
 				</p>
 			</div>
-			<ol>
+			<ol className="students-list">
 				{students &&
 					students.map((student) => (
 						<li key={student.Id}>
