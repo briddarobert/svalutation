@@ -3,6 +3,7 @@ import "/src/app/globals.css";
 import "./student-nav.css";
 import { getStudent } from "../../api";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function StudentSelector({
 	children,
@@ -11,7 +12,7 @@ export default function StudentSelector({
 	children: React.ReactNode;
 	params: { id: string };
 }) {
-	const currentPath = window.location.pathname;
+	const currentPath = usePathname();
 	let studentId: number = Number(params.id);
 	let [currentStudent] = getStudent(studentId);
 

@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getStudentsByClass } from "./api";
 import { getTeacher } from "./api";
 import "./home.css";
@@ -7,17 +7,28 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function Home({ params }: { params: { classId: string } }) {
-	sessionStorage.setItem("teacherId", "4"); // Temporary
 	const router = useRouter();
 	const classId = Number(params.classId);
-	const [teacher] = getTeacher(Number(sessionStorage.getItem("teacherId")));
+	const [teacher] = getTeacher(4);
 	const [students] = getStudentsByClass(classId);
+	const [hasMounted, setHasMounted] = useState<boolean>(false);
 
 	useEffect(() => {
-		sessionStorage.setItem("students", JSON.stringify(students));
+		setHasMounted(true);
+	}, []);
+	useEffect(() => {
+		sessionStorage.setItem("teacherId", "4"); // Temporary
+	}, [hasMounted]);
+
+	useEffect(() => {
+		if (hasMounted) {
+			sessionStorage.setItem("students", JSON.stringify(students));
+		}
 	}, [students]);
 	useEffect(() => {
-		sessionStorage.setItem("teacher", JSON.stringify(teacher));
+		if (hasMounted) {
+			sessionStorage.setItem("teacher", JSON.stringify(teacher));
+		}
 	}, [teacher]);
 
 	return (

@@ -1,4 +1,5 @@
 "use client";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 export default function StudentActionSelectPage({
@@ -6,7 +7,7 @@ export default function StudentActionSelectPage({
 }: {
 	params: { classId: string; id: string };
 }) {
-	const currentPath = window.location.pathname;
+	const currentPath = usePathname();
 	const studentId = params.id;
 
 	return (

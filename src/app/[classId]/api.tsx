@@ -53,6 +53,7 @@ const getStudent = (id: number) => {
 
 	useEffect(() => {
 		fetch(serverUrl + "/api/students/" + id, {
+			credentials: "include",
 			headers: {
 				Authorization: `Basic ${auth}`,
 			},
@@ -69,6 +70,7 @@ const getAllStudents = () => {
 
 	useEffect(() => {
 		fetch(serverUrl + "/api/students", {
+			credentials: "include",
 			headers: {
 				Authorization: `Basic ${auth}`,
 			},
@@ -85,6 +87,7 @@ const getStudentsByClass = (classId: number) => {
 
 	useEffect(() => {
 		fetch(serverUrl + "/api/students/class/" + classId, {
+			credentials: "include",
 			headers: {
 				Authorization: `Basic ${auth}`,
 			},
@@ -101,6 +104,7 @@ const getTeacher = (id: number) => {
 
 	useEffect(() => {
 		fetch(serverUrl + "/api/teachers/" + id, {
+			credentials: "include",
 			headers: {
 				Authorization: `Basic ${auth}`,
 			},
@@ -117,6 +121,7 @@ const getRemark = (id: number) => {
 
 	useEffect(() => {
 		fetch(serverUrl + "/api/remarks/" + id, {
+			credentials: "include",
 			headers: {
 				Authorization: `Basic ${auth}`,
 			},
@@ -133,6 +138,7 @@ const getAllRemarks = () => {
 
 	useEffect(() => {
 		fetch(serverUrl + "/api/remarks", {
+			credentials: "include",
 			headers: {
 				Authorization: `Basic ${auth}`,
 			},
@@ -148,6 +154,7 @@ const postRemark = (remark: Remark) => {
 	fetch(serverUrl + "/api/remarks", {
 		method: "POST",
 		body: JSON.stringify(remark),
+		credentials: "include",
 		headers: {
 			"Content-type": "application/x-www-form-urlencoded",
 			Authorization: `Basic ${auth}`,
@@ -162,6 +169,7 @@ const patchRemark = (remark: Remark) => {
 		fetch(serverUrl + "/api/remarks/" + remark.Id, {
 			method: "PATCH",
 			body: JSON.stringify(remark),
+			credentials: "include",
 			headers: {
 				"Content-type": "application/x-www-form-urlencoded",
 				Authorization: `Basic ${auth}`,
@@ -180,6 +188,7 @@ const deleteRemark = (id: number) => {
 	useEffect(() => {
 		fetch(serverUrl + "/api/remarks/" + id, {
 			method: "DELETE",
+			credentials: "include",
 			headers: {
 				Authorization: `Basic ${auth}`,
 			},
@@ -196,6 +205,7 @@ const getObservation = (id: number) => {
 
 	useEffect(() => {
 		fetch(serverUrl + "/api/observations/" + id, {
+			credentials: "include",
 			headers: {
 				Authorization: `Basic ${auth}`,
 			},
@@ -212,6 +222,7 @@ const getAllObservationsForStudent = (studentId: number) => {
 
 	useEffect(() => {
 		fetch(serverUrl + "/api/observations/student/" + studentId, {
+			credentials: "include",
 			headers: {
 				Authorization: `Basic ${auth}`,
 			},
@@ -225,7 +236,7 @@ const getAllObservationsForStudent = (studentId: number) => {
 
 const getAllObservationsByTeacherOnStudent = (
 	teacherId: number,
-	studentId: number,
+	studentId: number
 ) => {
 	const [data, setData] = useState<Observation[]>();
 
@@ -237,10 +248,11 @@ const getAllObservationsByTeacherOnStudent = (
 				"/" +
 				studentId,
 			{
+				credentials: "include",
 				headers: {
 					Authorization: `Basic ${auth}`,
 				},
-			},
+			}
 		)
 			.then((res) => res.json())
 			.then((data) => setData(data));
@@ -259,6 +271,7 @@ const postObservation = (observation: ObservationPost) => {
 	fetch(serverUrl + "/api/observations", {
 		method: "POST",
 		body: data,
+		credentials: "include",
 		headers: {
 			"Content-type": "application/x-www-form-urlencoded",
 			Authorization: `Basic ${auth}`,
@@ -273,6 +286,7 @@ const patchObservation = (observation: Observation) => {
 		fetch(serverUrl + "/api/observations/" + observation.Id, {
 			method: "PATCH",
 			body: JSON.stringify(observation),
+			credentials: "include",
 			headers: {
 				"Content-type": "application/x-www-form-urlencoded",
 				Authorization: `Basic ${auth}`,
@@ -291,6 +305,7 @@ const deleteObservation = (id: number) => {
 	useEffect(() => {
 		fetch(serverUrl + "/api/observations/" + id, {
 			method: "DELETE",
+			credentials: "include",
 			headers: {
 				Authorization: `Basic ${auth}`,
 			},
