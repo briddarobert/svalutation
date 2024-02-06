@@ -1,12 +1,14 @@
 .class-nav {
 	display: flex;
+	justify-content: center;
+	width: 100%;
 	flex-direction: row;
 	list-style: none;
 	background: var(--nav-color);
 	border-radius: var(--border-radius);
 }
 
-.class-nav p:not(#class-nav-info) {
+.class-nav a {
 	justify-content: center;
 	text-align: center;
 	width: 20%;

@@ -4,18 +4,20 @@ import { getStudentsByClass } from "./api";
 import { getTeacher } from "./api";
 import "./home.css";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 export default function Home({ params }: { params: { classId: string } }) {
-	const router = useRouter();
+	const currentPath = usePathname();
 	const classId = Number(params.classId);
 	const [teacher] = getTeacher(4);
+	const [classIndex, setClassIndex] = useState<number>(0);
 	const [students] = getStudentsByClass(classId);
 	const [hasMounted, setHasMounted] = useState<boolean>(false);
 
 	useEffect(() => {
 		setHasMounted(true);
 	}, []);
+
 	useEffect(() => {
 		sessionStorage.setItem("teacherId", "4"); // Temporary
 	}, [hasMounted]);
@@ -25,9 +27,13 @@ export default function Home({ params }: { params: { classId: string } }) {
 			sessionStorage.setItem("students", JSON.stringify(students));
 		}
 	}, [students]);
+
 	useEffect(() => {
-		if (hasMounted) {
+		if (hasMounted && teacher) {
 			sessionStorage.setItem("teacher", JSON.stringify(teacher));
+			setClassIndex(
+				teacher?.Classes.findIndex((classN) => classN.Id == classId)
+			);
 		}
 	}, [teacher]);
 
@@ -35,23 +41,53 @@ export default function Home({ params }: { params: { classId: string } }) {
 		<>
 			<h1>Studenti</h1>
 			<div className="class-nav">
-				<p
-					onClick={() => {
-						router.push(`/${classId - 1}`);
+				<Link
+					href={{
+						pathname: `${(() => {
+							if (teacher) {
+								let splitPaths = currentPath.split("/");
+
+								if (classIndex > 0)
+									splitPaths[1] =
+										teacher.Classes[
+											classIndex - 1
+										].Id.toString();
+								else
+									splitPaths[1] =
+										teacher.Classes[
+											teacher.Classes.length - 1
+										].Id.toString();
+								return splitPaths.join("/");
+							} else return currentPath;
+						})()}`,
 					}}
 				>
 					←
-				</p>
+				</Link>
 				<p id="class-nav-info">
-					{teacher && teacher.Classes[classId - 1].Name}
+					{teacher && teacher.Classes[classIndex].Name}
 				</p>
-				<p
-					onClick={() => {
-						router.push(`/${classId + 1}`);
+				<Link
+					href={{
+						pathname: `${(() => {
+							if (teacher) {
+								let splitPaths = currentPath.split("/");
+
+								if (classIndex < teacher.Classes.length - 1)
+									splitPaths[1] =
+										teacher.Classes[
+											classIndex + 1
+										].Id.toString();
+								else
+									splitPaths[1] =
+										teacher.Classes[0].Id.toString();
+								return splitPaths.join("/");
+							} else return currentPath;
+						})()}`,
 					}}
 				>
 					→
-				</p>
+				</Link>
 			</div>
 			<ol className="students-list">
 				{students &&

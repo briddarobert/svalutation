@@ -1,9 +1,10 @@
 "use client";
 import "/src/app/globals.css";
 import "./student-nav.css";
-import { getStudent } from "../../api";
+import { Student, getStudent } from "../../api";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function StudentSelector({
 	children,
@@ -13,8 +14,25 @@ export default function StudentSelector({
 	params: { id: string };
 }) {
 	const currentPath = usePathname();
+	const [hasMounted, setHasMounted] = useState<boolean>(false);
 	let studentId: number = Number(params.id);
 	let [currentStudent] = getStudent(studentId);
+	const [students, setStudents] = useState<Student[]>();
+	const [currentIndex, setCurrentIndex] = useState<number>();
+
+	useEffect(() => {
+		setHasMounted(true);
+	}, []);
+	useEffect(() => {
+		setStudents(JSON.parse(sessionStorage.getItem("students") ?? ""));
+	}, [hasMounted]);
+
+	useEffect(() => {
+		if (students)
+			setCurrentIndex(
+				students.findIndex((student) => student.Id == studentId)
+			);
+	}, [students]);
 
 	return (
 		<>
@@ -25,11 +43,26 @@ export default function StudentSelector({
 							<Link
 								href={{
 									pathname: `${(() => {
-										let splitPaths = currentPath.split("/");
-										splitPaths[3] = (
-											studentId - 1
-										).toString();
-										return splitPaths.join("/");
+										if (
+											students &&
+											currentIndex != undefined
+										) {
+											let splitPaths =
+												currentPath.split("/");
+
+											if (currentIndex > 0)
+												splitPaths[3] =
+													students[
+														currentIndex - 1
+													].Id.toString();
+											else
+												splitPaths[3] =
+													students[
+														students.length - 1
+													].Id.toString();
+
+											return splitPaths.join("/");
+										}
 									})()}`,
 								}}
 							>
@@ -49,11 +82,26 @@ export default function StudentSelector({
 							<Link
 								href={{
 									pathname: `${(() => {
-										let splitPaths = currentPath.split("/");
-										splitPaths[3] = (
-											studentId + 1
-										).toString();
-										return splitPaths.join("/");
+										if (
+											students &&
+											currentIndex != undefined
+										) {
+											let splitPaths =
+												currentPath.split("/");
+											if (
+												currentIndex <
+												students.length - 1
+											)
+												splitPaths[3] =
+													students[
+														currentIndex + 1
+													].Id.toString();
+											else
+												splitPaths[3] =
+													students[0].Id.toString();
+
+											return splitPaths.join("/");
+										}
 									})()}`,
 								}}
 							>

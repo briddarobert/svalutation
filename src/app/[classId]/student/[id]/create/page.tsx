@@ -5,7 +5,9 @@ import {
 	getAllRemarks,
 	postObservation,
 } from "@/app/[classId]/api";
-import { useState } from "react";
+import { remarkDialog } from "@/app/remark";
+import { useEffect, useState } from "react";
+import "./page.css";
 
 export default function StudentCreatePage({
 	params,
@@ -13,27 +15,32 @@ export default function StudentCreatePage({
 	params: { classId: string; id: string };
 }) {
 	const studentId = params.id;
-	const [remarks] = getAllRemarks();
+	let [tempRemarks] = getAllRemarks();
+	const [remarks, setRemarks] = useState<Remark[]>();
 	const [selectedRemark, setSelectedRemark] = useState<Remark>();
 	const [achieved, setAchieved] = useState<boolean>(true);
+
+	useEffect(() => {
+		setRemarks(tempRemarks);
+	}, [tempRemarks]);
 
 	return (
 		<>
 			<h1>Pagina Student Create</h1>
-			<ol>
+			<ol className="remarks-list">
 				{remarks &&
 					remarks.map((remark) => (
 						<li
 							key={remark.Id}
 							onClick={() => {
 								const listItem = document.getElementById(
-									`${remark.Id}`,
+									`${remark.Id}`
 								) as HTMLInputElement;
 								if (listItem) listItem.checked = true;
 								setSelectedRemark(remark);
 							}}
 						>
-							<p>
+							<label>
 								<input
 									type="radio"
 									name="remark-selector"
@@ -42,12 +49,12 @@ export default function StudentCreatePage({
 								ID:{remark.Id} Skill:{remark.Skill} Level:
 								{remark.Level} Description:
 								{remark.Description}
-							</p>
+							</label>
 						</li>
 					))}
 			</ol>
 			<label>
-				Sì{" "}
+				Sì
 				<input
 					type="radio"
 					name="achieved"
@@ -60,7 +67,6 @@ export default function StudentCreatePage({
 				></input>
 			</label>
 			<label>
-				{" "}
 				No
 				<input
 					type="radio"
@@ -77,7 +83,7 @@ export default function StudentCreatePage({
 					if (selectedRemark) {
 						const newObservation: ObservationPost = {
 							Teacher: Number(
-								sessionStorage.getItem("teacherId"),
+								sessionStorage.getItem("teacherId")
 							).toString(),
 							Student: studentId,
 							Remark: selectedRemark.Id.toString(),
@@ -89,6 +95,8 @@ export default function StudentCreatePage({
 			>
 				Inserisci osservazione
 			</button>
+			<hr />
+			{remarkDialog(remarks, setRemarks)}
 		</>
 	);
 }

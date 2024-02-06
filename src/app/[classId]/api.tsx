@@ -27,6 +27,13 @@ export interface Remark {
 	Description: string;
 }
 
+export interface RemarkPost {
+	Id?: number;
+	Skill: string;
+	Level: string;
+	Description: string;
+}
+
 export interface Observation {
 	Id: number;
 	Teacher: Teacher;
@@ -150,10 +157,15 @@ const getAllRemarks = () => {
 	return [data];
 };
 
-const postRemark = (remark: Remark) => {
-	fetch(serverUrl + "/api/remarks", {
+const postRemark = (remark: RemarkPost) => {
+	var data = new URLSearchParams();
+	data.append("skill", remark.Skill);
+	data.append("level", remark.Level);
+	data.append("description", remark.Description);
+
+	return fetch(serverUrl + "/api/remarks", {
 		method: "POST",
-		body: JSON.stringify(remark),
+		body: data,
 		credentials: "include",
 		headers: {
 			"Content-type": "application/x-www-form-urlencoded",
