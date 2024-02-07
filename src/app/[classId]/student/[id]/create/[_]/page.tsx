@@ -2,12 +2,13 @@
 import {
 	ObservationPost,
 	Remark,
+	deleteRemark,
 	getAllRemarks,
 	postObservation,
 } from "@/app/[classId]/api";
 import { remarkDialog } from "@/app/remark";
 import { useEffect, useState } from "react";
-import "./page.css";
+import "./create.css";
 
 export default function StudentCreatePage({
 	params,
@@ -46,10 +47,36 @@ export default function StudentCreatePage({
 									name="remark-selector"
 									id={`${remark.Id}`}
 								/>
-								ID:{remark.Id} Skill:{remark.Skill} Level:
-								{remark.Level} Description:
-								{remark.Description}
+								<p>
+									{(() => {
+										switch (remark.Skill) {
+											case 1:
+												return "Comp1";
+											case 2:
+												return "Comp2";
+											case 3:
+												return "Comp3";
+											case 4:
+												return "Comp4";
+											default:
+												return "Not good";
+										}
+									})()}
+								</p>
+								<p>Lvl {remark.Level}</p>
+								<p>{remark.Description}</p>
 							</label>
+							<button
+								onClick={() => {
+									deleteRemark(remark.Id);
+									let filteredRemarks = remarks.filter(
+										(rem) => rem.Id !== remark.Id
+									);
+									setRemarks(filteredRemarks);
+								}}
+							>
+								Cancella remark
+							</button>
 						</li>
 					))}
 			</ol>

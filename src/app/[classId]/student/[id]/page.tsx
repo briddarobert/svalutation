@@ -18,7 +18,7 @@ export default function StudentActionSelectPage({
 						pathname: `${(() => {
 							let splitPaths = currentPath.split("/");
 							splitPaths[3] = studentId;
-							splitPaths.push("view");
+							splitPaths.push("view/1");
 							return splitPaths.join("/");
 						})()}`,
 					}}
@@ -33,7 +33,7 @@ export default function StudentActionSelectPage({
 						pathname: `${(() => {
 							let splitPaths = currentPath.split("/");
 							splitPaths[3] = studentId;
-							splitPaths.push("create");
+							splitPaths.push("create/useless");
 							return splitPaths.join("/");
 						})()}`,
 					}}

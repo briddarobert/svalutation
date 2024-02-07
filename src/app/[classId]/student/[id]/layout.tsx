@@ -3,7 +3,7 @@ import "/src/app/globals.css";
 import "./student-nav.css";
 import { Student, getStudent } from "../../api";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function StudentSelector({
@@ -13,6 +13,7 @@ export default function StudentSelector({
 	children: React.ReactNode;
 	params: { id: string };
 }) {
+	const router = useRouter();
 	const currentPath = usePathname();
 	const [hasMounted, setHasMounted] = useState<boolean>(false);
 	let studentId: number = Number(params.id);
@@ -25,6 +26,10 @@ export default function StudentSelector({
 	}, []);
 	useEffect(() => {
 		setStudents(JSON.parse(sessionStorage.getItem("students") ?? ""));
+
+		window.onpopstate = () => {
+			router.push("../");
+		};
 	}, [hasMounted]);
 
 	useEffect(() => {
@@ -37,78 +42,65 @@ export default function StudentSelector({
 	return (
 		<>
 			<section>
-				<nav>
-					<ol className="student-nav">
-						<li id="student-nav-arrow-left">
-							<Link
-								href={{
-									pathname: `${(() => {
-										if (
-											students &&
-											currentIndex != undefined
-										) {
-											let splitPaths =
-												currentPath.split("/");
+				<nav className="student-nav">
+					<span id="student-nav-arrow-left">
+						<Link
+							href={{
+								pathname: `${(() => {
+									if (students && currentIndex != undefined) {
+										let splitPaths = currentPath.split("/");
 
-											if (currentIndex > 0)
-												splitPaths[3] =
-													students[
-														currentIndex - 1
-													].Id.toString();
-											else
-												splitPaths[3] =
-													students[
-														students.length - 1
-													].Id.toString();
+										if (currentIndex > 0)
+											splitPaths[3] =
+												students[
+													currentIndex - 1
+												].Id.toString();
+										else
+											splitPaths[3] =
+												students[
+													students.length - 1
+												].Id.toString();
 
-											return splitPaths.join("/");
-										}
-									})()}`,
-								}}
-							>
-								←
-							</Link>
-						</li>
-						<li id="student-nav-info">
-							<h2 id="student-nav-info-name">
-								{currentStudent && currentStudent.Name}{" "}
-								{currentStudent && currentStudent.Surname}
-							</h2>
-							<h1 id="student-nav-info-class">
-								{currentStudent && currentStudent.Class.Name}
-							</h1>
-						</li>
-						<li id="student-nav-arrow-right">
-							<Link
-								href={{
-									pathname: `${(() => {
-										if (
-											students &&
-											currentIndex != undefined
-										) {
-											let splitPaths =
-												currentPath.split("/");
-											if (
-												currentIndex <
-												students.length - 1
-											)
-												splitPaths[3] =
-													students[
-														currentIndex + 1
-													].Id.toString();
-											else
-												splitPaths[3] =
-													students[0].Id.toString();
+										return splitPaths.join("/");
+									}
+								})()}`,
+							}}
+						>
+							←
+						</Link>
+					</span>
+					<span id="student-nav-info">
+						<h2 id="student-nav-info-name">
+							{currentStudent && currentStudent.Name}{" "}
+							{currentStudent && currentStudent.Surname}
+						</h2>
+						<h1 id="student-nav-info-class">
+							{currentStudent && currentStudent.Class.Name}
+						</h1>
+					</span>
+					<span id="student-nav-arrow-right">
+						<Link
+							href={{
+								pathname: `${(() => {
+									if (students && currentIndex != undefined) {
+										let splitPaths = currentPath.split("/");
+										if (currentIndex < students.length - 1)
+											splitPaths[3] =
+												students[
+													currentIndex + 1
+												].Id.toString();
+										else
+											splitPaths[3] =
+												students[0].Id.toString();
 
-											return splitPaths.join("/");
-										}
-									})()}`,
-								}}
-							>
-								→
-							</Link>
-						</li>
-					</ol>
+										return splitPaths.join("/");
+									}
+								})()}`,
+							}}
+						>
+							→
+						</Link>
+					</span>
 				</nav>
 				{children}
 			</section>

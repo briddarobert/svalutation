@@ -1,9 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
 
-export const serverUrl = "http://localhost:8080";
-export const userName = "prof";
-export const password = "uaupassword1233";
+const serverUrl = "http://localhost:8080";
+const userName = "prof";
+const password = "uaupassword1233";
 const auth = Buffer.from(`${userName}:${password}`).toString("base64");
 
 export interface Student {
@@ -195,21 +195,13 @@ const patchRemark = (remark: Remark) => {
 };
 
 const deleteRemark = (id: number) => {
-	const [data, setData] = useState(null);
-
-	useEffect(() => {
-		fetch(serverUrl + "/api/remarks/" + id, {
-			method: "DELETE",
-			credentials: "include",
-			headers: {
-				Authorization: `Basic ${auth}`,
-			},
-		})
-			.then((res) => res.json())
-			.then((data) => setData(data));
-	}, []);
-
-	return [data];
+	fetch(serverUrl + "/api/remarks/" + id, {
+		method: "DELETE",
+		credentials: "include",
+		headers: {
+			Authorization: `Basic ${auth}`,
+		},
+	});
 };
 
 const getObservation = (id: number) => {
@@ -312,21 +304,13 @@ const patchObservation = (observation: Observation) => {
 };
 
 const deleteObservation = (id: number) => {
-	const [data, setData] = useState(null);
-
-	useEffect(() => {
-		fetch(serverUrl + "/api/observations/" + id, {
-			method: "DELETE",
-			credentials: "include",
-			headers: {
-				Authorization: `Basic ${auth}`,
-			},
-		})
-			.then((res) => res.json())
-			.then((data) => setData(data));
-	}, []);
-
-	return [data];
+	fetch(serverUrl + "/api/observations/" + id, {
+		method: "DELETE",
+		credentials: "include",
+		headers: {
+			Authorization: `Basic ${auth}`,
+		},
+	});
 };
 
 export {

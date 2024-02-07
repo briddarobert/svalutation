@@ -22,10 +22,10 @@ export function remarkDialog(
 								setSkill(e.target.value);
 							}}
 						>
-							<option value="0">Comp1</option>
-							<option value="1">Comp2</option>
-							<option value="2">Comp3</option>
-							<option value="3">Comp4</option>
+							<option value="1">Comp1</option>
+							<option value="2">Comp2</option>
+							<option value="3">Comp3</option>
+							<option value="4">Comp4</option>
 						</select>
 					</label>
 					<label>
