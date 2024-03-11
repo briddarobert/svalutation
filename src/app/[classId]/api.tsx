@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 
-const serverUrl = "http://localhost:8080";
+const serverUrl = "http://85.235.150.118:8080";
 const userName = "prof";
 const password = "uaupassword1233";
 const auth = Buffer.from(`${userName}:${password}`).toString("base64");
