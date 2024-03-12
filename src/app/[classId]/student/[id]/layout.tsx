@@ -27,7 +27,8 @@ export default function StudentSelector({
 	useEffect(() => {
 		setStudents(JSON.parse(sessionStorage.getItem("students") ?? ""));
 
-		window.onpopstate = () => {
+		window.onpopstate = (e) => {
+			e.preventDefault();
 			router.push("../");
 		};
 	}, [hasMounted]);
