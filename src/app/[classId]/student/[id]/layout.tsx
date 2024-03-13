@@ -24,13 +24,9 @@ export default function StudentSelector({
 	useEffect(() => {
 		setHasMounted(true);
 	}, []);
+
 	useEffect(() => {
 		setStudents(JSON.parse(sessionStorage.getItem("students") ?? ""));
-
-		window.onpopstate = (e) => {
-			e.preventDefault();
-			router.push("../");
-		};
 	}, [hasMounted]);
 
 	useEffect(() => {
@@ -43,6 +39,9 @@ export default function StudentSelector({
 	return (
 		<>
 			<section>
+				<Link href={"../"} style={{ fontSize: "xxx-large" }}>
+					&times;
+				</Link>
 				<nav className="student-nav">
 					<span id="student-nav-arrow-left">
 						<Link
