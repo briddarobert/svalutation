@@ -22,6 +22,7 @@ export default function StudentCreatePage({
 	const [achieved, setAchieved] = useState<boolean>(true);
 
 	useEffect(() => {
+		tempRemarks = tempRemarks ?? [];
 		setRemarks(tempRemarks);
 	}, [tempRemarks]);
 
