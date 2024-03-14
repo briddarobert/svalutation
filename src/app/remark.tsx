@@ -6,7 +6,7 @@ export function remarkDialog(
 	remarks: Remark[] | undefined,
 	setRemarks: Dispatch<SetStateAction<Remark[] | undefined>>
 ) {
-	const [skill, setSkill] = useState<string>("0");
+	const [skill, setSkill] = useState<string>("1");
 	const [level, setLevel] = useState<string>("1");
 	const [description, setDescription] = useState<string>("");
 
