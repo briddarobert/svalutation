@@ -11,8 +11,8 @@ export default function StudentActionSelectPage({
 	const studentId = params.id;
 
 	return (
-		<>
-			<p>
+		<ol className="maximized-list">
+			<li>
 				<Link
 					href={{
 						pathname: `${(() => {
@@ -26,8 +26,8 @@ export default function StudentActionSelectPage({
 				>
 					Guarda Osservazioni
 				</Link>
-			</p>
-			<p>
+			</li>
+			<li>
 				<Link
 					href={{
 						pathname: `${(() => {
@@ -41,7 +41,7 @@ export default function StudentActionSelectPage({
 				>
 					Fai Osservazione
 				</Link>
-			</p>
-		</>
+			</li>
+		</ol>
 	);
 }

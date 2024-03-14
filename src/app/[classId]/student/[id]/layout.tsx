@@ -5,6 +5,7 @@ import { Student, getStudent } from "../../api";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 export default function StudentSelector({
 	children,
@@ -66,7 +67,12 @@ export default function StudentSelector({
 								})()}`,
 							}}
 						>
-							←
+							<Image
+								src="/arrow-left.svg"
+								alt="Go left"
+								height={80}
+								width={80}
+							/>
 						</Link>
 					</span>
 					<span id="student-nav-info">
@@ -98,7 +104,12 @@ export default function StudentSelector({
 								})()}`,
 							}}
 						>
-							→
+							<Image
+								src="/arrow-right.svg"
+								alt="Go right"
+								height={80}
+								width={80}
+							/>
 						</Link>
 					</span>
 				</nav>
