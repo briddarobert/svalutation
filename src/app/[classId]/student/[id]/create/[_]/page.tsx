@@ -9,6 +9,7 @@ import {
 import { remarkDialog } from "@/app/remark";
 import { useEffect, useState } from "react";
 import "./create.css";
+import { useRouter } from "next/navigation";
 
 export default function StudentCreatePage({
 	params,
@@ -16,6 +17,7 @@ export default function StudentCreatePage({
 	params: { classId: string; id: string };
 }) {
 	const studentId = params.id;
+	const router = useRouter();
 	let [tempRemarks] = getAllRemarks();
 	const [remarks, setRemarks] = useState<Remark[]>();
 	const [selectedRemark, setSelectedRemark] = useState<Remark>();
@@ -28,7 +30,7 @@ export default function StudentCreatePage({
 
 	return (
 		<>
-			<h1>Pagina Student Create</h1>
+			<h1>Fai Osservazione</h1>
 			<ol className="remarks-list">
 				{remarks &&
 					remarks.map((remark) => (
@@ -118,6 +120,7 @@ export default function StudentCreatePage({
 							Achieved: achieved.toString(),
 						};
 						postObservation(newObservation);
+						router.push("../");
 					}
 				}}
 			>

@@ -36,7 +36,7 @@ export default function StudentViewPage({
 
 	return (
 		<>
-			<h1>Pagina Student View</h1>
+			<h1>Guarda Osservazioni</h1>
 			<div className="skill-nav">
 				<Link
 					href={{
@@ -93,35 +93,52 @@ export default function StudentViewPage({
 					→
 				</Link>
 			</div>
-			{observations &&
-				observations.map((observation) => {
-					if (observation.Remark.Skill == currentSkill)
-						return (
-							<div key={observation.Id}>
-								<p>
-									ID:{observation.Id}
-									Level:{observation.Remark.Level}
-									Skill:{observation.Remark.Skill}
-									Description:{observation.Remark.Description}
-									Achieved:
-									{observation.Achieved ? "Sì" : "No"}
-								</p>
-								<button
-									onClick={() => {
-										deleteObservation(observation.Id);
-										let filteredObservations =
-											observations.filter(
-												(obs) =>
-													obs.Id !== observation.Id
-											);
-										setObservations(filteredObservations);
-									}}
-								>
-									Rimuovi osservazione
-								</button>
-							</div>
-						);
-				})}
+			<table>
+				<thead>
+					<tr>
+						<th>Livello</th>
+						<th>Descrizione</th>
+						<th>Raggiunto</th>
+					</tr>
+				</thead>
+				{observations &&
+					observations.map((observation) => {
+						if (observation.Remark.Skill == currentSkill)
+							return (
+								<tbody>
+									<tr key={observation.Id}>
+										<td>{observation.Remark.Level}</td>
+										<td>
+											{observation.Remark.Description}
+										</td>
+										<td>
+											{observation.Achieved ? "Si" : "No"}
+										</td>
+										<td>
+											<button
+												onClick={() => {
+													deleteObservation(
+														observation.Id
+													);
+													let filteredObservations =
+														observations.filter(
+															(obs) =>
+																obs.Id !==
+																observation.Id
+														);
+													setObservations(
+														filteredObservations
+													);
+												}}
+											>
+												Rimuovi osservazione
+											</button>
+										</td>
+									</tr>
+								</tbody>
+							);
+					})}
+			</table>
 		</>
 	);
 }

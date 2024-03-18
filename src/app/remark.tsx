@@ -72,16 +72,15 @@ export function remarkDialog(
 					>
 						Crea Remark
 					</button>
+					<button
+						autoFocus
+						onClick={() => {
+							document.querySelector("dialog")?.close();
+						}}
+					>
+						Chiudi
+					</button>
 				</div>
-
-				<button
-					autoFocus
-					onClick={() => {
-						document.querySelector("dialog")?.close();
-					}}
-				>
-					Chiudi
-				</button>
 			</dialog>
 			<button
 				onClick={() => {
