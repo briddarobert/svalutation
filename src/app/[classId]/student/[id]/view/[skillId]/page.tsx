@@ -101,11 +101,11 @@ export default function StudentViewPage({
 						<th>Raggiunto</th>
 					</tr>
 				</thead>
-				{observations &&
-					observations.map((observation) => {
-						if (observation.Remark.Skill == currentSkill)
-							return (
-								<tbody>
+				<tbody>
+					{observations &&
+						observations.map((observation) => {
+							if (observation.Remark.Skill == currentSkill)
+								return (
 									<tr key={observation.Id}>
 										<td>{observation.Remark.Level}</td>
 										<td>
@@ -135,9 +135,9 @@ export default function StudentViewPage({
 											</button>
 										</td>
 									</tr>
-								</tbody>
-							);
-					})}
+								);
+						})}
+				</tbody>
 			</table>
 		</>
 	);
